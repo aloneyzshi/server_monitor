@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block self_head_css_js %}
+<script src="/static/layer/layer.js"></script>
+<script src="/static/js/base.js"></script>
+<script src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="/static/plugins/datatables/dataTables.bootstrap.css"></script>
+{% endblock %}
+{% block content %}
+<script>
+    window.onload=init;
+    function init() {
+        showhide(2);
+    }
+    function showhide(n) {
+        var box = document.getElementById("accounts");
+        box.className="active";
+        var box = document.getElementById("role");
+        box.className="active";
+    }
+
+</script>
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                {% csrf_token %}
+                <div class="box">
+                    <div class="box-header">
+
+                        <h3 class="box-title"><a href="{% url 'role_add' %}">
+                            <li class="btn btn-success"><b>添加角色</b></li>
+                        </a></h3>
+
+                    </div>
+
+
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="dataform" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>角色名称</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for role in all_role %}
+                            <tr>
+                                <td>{{ role.name }}</td>
+                                <td>
+                                    <a href="{% url 'role_edit' role.id %}">
+                                        <li class="btn btn-sm btn-info" onclick="return tanchu(this.value)"
+                                            value="{{ role.id }}">编辑
+                                        </li>
+                                    </a>
+                                    <a value="{% url 'role_del' role.id %}"
+                                       class="btn btn-sm btn-danger role_del">删除</a>
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+<script>
+    $(document).ready(function(){
+        $('.role_del').click(function(){
+            var row = $(this).closest('tr');
+            if (confirm("确定删除?")) {
+                $.get(
+                        $(this).attr('value'),
+                        {},
+                        function (data) {
+                            row.remove()
+                        }
+                );
+                layer.msg('删除成功！',{
+                    icon: 1,
+                    time: 1000 //2秒关闭（如果不配置，默认是3秒）
+                },function(){
+                    history.go(0);
+                });
+            }
+        });
+    });
+
+
+
+
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+<header class="main-header">
+    {% include 'logo-base.html' %}
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li style="font-size: medium" id="dashboard"><a href="{% url 'monitor'  %}"><b>监控大盘</b></a></li>
+                <li style="font-size: medium" id="role_list"><a href="{% url 'role_list' %}"><b>角色管理</b></a>
+                </li>
+
+                <li style="font-size: medium" id="permission_list"><a href="{% url 'permission_list' %}"><b>权限管理</b></a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- Navbar Right Menu -->
+        {% include 'navbar-custom-menu.html' %}
+    </nav>
+</header>

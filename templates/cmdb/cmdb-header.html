@@ -1,0 +1,22 @@
+<header class="main-header">
+    {% include 'logo-base.html' %}
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li style="font-size: medium" id="asset"><a href="{% url 'asset_list' %}"><b>主机管理</b></a></li>
+                <li class="divider"></li>
+                <li style="font-size: medium" id="idc"><a href="{% url 'idc_list' %}"><b>机房管理</b></a></li>
+                <li class="divider"></li>
+                <li style="font-size: medium" id="group"><a href="{% url 'group_list' %}"><b>属组管理</b></a></li>
+            </ul>
+        </div>
+        <!-- Navbar Right Menu -->
+        {% include 'navbar-custom-menu.html' %}
+    </nav>
+</header>
